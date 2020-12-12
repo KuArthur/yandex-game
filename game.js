@@ -13,8 +13,8 @@ function getRandomNumber(max) {
 function getRandomArray() {
   const arr = [];
   
-  const M = getRandomNumber(10);
-  const N = getRandomNumber(10);
+  const M = getRandomNumber(30);
+  const N = getRandomNumber(30);
 
   for(let i = 0; i < M; i++) {
     arr[i] = [];
@@ -55,25 +55,24 @@ function getDataFromFile() {
 
 // создаем игру
 function createGame(arr) {
-    
     for(let i = 0; i < arr.length; i++) {
-        for (let j = 0; j < arr[i].length; j++) {
-            let count = countNeighbors(arr,i,j)
-            
-            if(arr[i][j] === 1) { // если 1
-                if(count < 2 || count > 3) { // если меньше двух соседей или больше трех соседей
-                    arr[i][j] = 0
-                } else if(count === 2 || count === 3) { //если 2 или 3 соседа
-                    arr[i][j] = 1;
-                }
-            } else { // если 0
-                if (count === 3) { // если соседей 3
-                    arr[i][j] = 1
-                }
-            }
-            
-        }
-        console.log(arr[i].join(' '));
+      for (let j = 0; j < arr[i].length; j++) {
+          let count = countNeighbors(arr,i,j)
+          
+          if(arr[i][j] === 1) { // если 1
+              if(count < 2 || count > 3) { // если меньше двух соседей или больше трех соседей
+                  arr[i][j] = 0
+              } else if(count === 2 || count === 3) { //если 2 или 3 соседа
+                  arr[i][j] = 1;
+              }
+          } else { // если 0
+              if (count === 3) { // если соседей 3
+                  arr[i][j] = 1
+              }
+          }
+          
+      }
+      console.log(arr[i].join(' '));
     }
     console.log('---------------');
     return arr;
