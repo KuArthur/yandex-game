@@ -1,68 +1,26 @@
-// const M = 10;
-// const N = 10;
+const fs = require('fs'); // для работы с файлами
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+}
+
+function getRandomArray() {
+  const arr = [];
+  
+  const M = getRandomInt(10);
+  const N = getRandomInt(10);
+
+  for(let i = 0; i < M; i++) {
+    arr[i] = [];
+
+    for(let j = 0; j < N; j++) {
+        arr[i][j] = getRandomInt(2);
+    }
+  }
+  return arr;
+}
 
 
-// function getRandomInt(max) {
-//     return Math.floor(Math.random() * Math.floor(max));
-// }
-// let arr = [];
-
-// for(let i = 0; i < M; i++) {
-//     arr[i] = [];
-
-//     for(let j = 0; j < N; j++) {
-//         arr[i][j] = getRandomInt(2);
-//     }
-
-//     console.log(arr[i].join(' '));
-// }
-
-// console.log(arr);
-
-const arrLarge = [
-    [
-      1, 1, 0, 1, 0,
-      1, 0, 0, 0, 1
-    ],
-    [
-      1, 1, 1, 0, 0,
-      1, 1, 1, 0, 1
-    ],
-    [
-      0, 1, 0, 0, 0,
-      0, 1, 0, 1, 0
-    ],
-    [
-      1, 0, 1, 1, 0,
-      0, 0, 1, 1, 1
-    ],
-    [
-      1, 0, 1, 1, 1,
-      0, 0, 1, 1, 0
-    ],
-    [
-      0, 1, 0, 0, 0,
-      0, 0, 1, 0, 0
-    ],
-    [
-      0, 1, 1, 1, 0,
-      1, 0, 1, 1, 1
-    ],
-    [
-      0, 0, 1, 0, 0,
-      0, 0, 0, 1, 0
-    ],
-    [
-      1, 0, 1, 0, 1,
-      0, 0, 0, 1, 0
-    ],
-    [
-      1, 0, 0, 0, 1,
-      1, 1, 1, 1, 0
-    ]
-  ]
-
-const arrSmall = [[ 0, 0, 1, 1 ],[ 1, 1, 1, 1 ],[ 0, 0, 1, 0 ],[ 1, 1, 0, 1 ]];
 
 function countNeighbors(arr,i,j) {
     let count = 0;
@@ -78,6 +36,20 @@ function countNeighbors(arr,i,j) {
     return count;
 }
 
+function getDataFromFile() {
+  let array = fs.readFileSync('default.txt','utf-8');
+
+  array = array.split("\n");
+
+  for(let i = 0; i < array.length; i++) {
+    array[i] = array[i].replace("\r",'').split(' ');
+    
+  }
+  return array;
+}
+
+const arrFromFile = getDataFromFile();
+const arrRand = getRandomArray();
 
 function game(arr) {
     
@@ -104,5 +76,5 @@ function game(arr) {
     return arr;
 }
 
- let timeid = setInterval(() => game(arrSmall) ,1000);
+let timeid = setInterval(() => game(arrFromFile) ,1000);
 //  console.log(countNeighbors(arrSmall,0,1));
